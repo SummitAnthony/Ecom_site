@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .product-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-title {
+            font-size: 28px;
+            margin-top: 20px;
+            color: #007bff;
+        }
+
+        .product-price {
+            font-size: 24px;
+            color: #28a745;
+            margin-top: 10px;
+        }
+
+        .product-details {
+            font-size: 16px;
+            margin-top: 20px;
+        }
+    </style>
+    <title>Product Details</title>
+</head>
+<body>
+   <div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <img src="{{ product.image }}" class="product-image" alt="Product Image">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="product-title">{{ product.title }}</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="product-price">{{ product.price }} tk</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="product-details">{{ product.description  }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+   </div>
+
+   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Elegant Shop</title>
+    <!-- BEGIN: Bootstrap CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- END: Bootstrap CDN -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            margin-top: 30px;
+        }
+
+        .list-group-item {
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            margin-bottom: 15px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .list-group-item span {
+            font-size: 18px;
+            color: #555;
+        }
+
+        .list-group-item .badge {
+            font-size: 18px;
+            background-color: #ffc107;
+            color: #333;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        button.btn-primary {
+            background-color: #007bff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+        }
+
+        button.btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="list-group" id="item_list">
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" id="items" name="items">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail4">Name</label>
+                            <input id="name" name="name" type="text" class="form-control" placeholder="John Doe">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">Email</label>
+                            <input id="email" name="email" type="text" class="form-control" placeholder="john@doe.com">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAddress">Address</label>
+                        <input type="text" class="form-control" id="address" name="address" placeholder="1234 Main St">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputCity">City</label>
+                            <input type="text" class="form-control" id="city" name="city">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputState">State</label>
+                            <select id="state" name="state" class="form-control">
+                                <option selected>Choose...</option>
+                                <option>...</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="inputZip">Zip</label>
+                            <input type="text" class="form-control" id="zip_code">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="total">Amount to be paid</label>
+                            <input readonly="" type="text" class="form-control" id="total" name="total">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Place Order</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        if(localStorage.getItem('cart') == null){
+            var cart = {};
+        } else {
+            cart = JSON.parse(localStorage.getItem('cart'));
+        }
+
+        let total = 0;
+        for(item in cart){
+            let name = cart[item][1];
+            let quantity = cart[item][0];
+            let price = cart[item][2];
+
+            total = total + cart[item][2];
+
+            itemString = `<li class="list-group-item">
+                <div>
+                    <span>Quantity:</span>
+                    <span>${quantity}</span>
+                </div>
+                <div>
+                    <span>Name:</span>
+                    <span>${name}</span>
+                </div>
+                <div>
+                    <span>Price:</span>
+                    <span class="badge">${price}</span>
+                </div>
+            </li>`;
+
+            $('#item_list').append(itemString);
+        }
+
+        totalPrice = `<li class="list-group-item">
+            <div>
+                <span>Your Total:</span>
+                <span>${total}</span>
+            </div>
+        </li>`;
+        $('#total').val(total);
+        $('#item_list').append(totalPrice);
+        $('#items').val(JSON.stringify(cart));
+    </script>
+</body>
+</html>
