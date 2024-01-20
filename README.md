@@ -11,8 +11,8 @@ Simple Ecommerce website using Django
 ### Register Page
 ![Register Page](Project_images/cart_feature.JPG)
 
-### Main Page
-![Main Page](Project_images/checkout_page.JPG)
+### Checkout Page
+![Checkout Page](Project_images/checkout_ page.JPG)
 
 
 
