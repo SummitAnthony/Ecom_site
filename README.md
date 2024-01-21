@@ -14,7 +14,8 @@ Simple Ecommerce website using Django
 ### Checkout Page
 ![Checkout Page](Project_images/checkout_page.JPG)
 
-
+### Customized Admin Panel
+![Checkout Page](Project_images/custom.JPG)
 
 ## Learning Outcomes
 
